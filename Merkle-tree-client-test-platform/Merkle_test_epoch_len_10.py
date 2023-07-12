@@ -7,7 +7,6 @@ import os
 from merkletools import MerkleTools
 import hashlib
 import json
-import numpy as np
 import random
 import os
 import time
