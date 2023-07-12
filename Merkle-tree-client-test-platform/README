@@ -1,0 +1,1 @@
+nohup bash run_Merkle_test_epoch_len_10.sh > script_output.log &
