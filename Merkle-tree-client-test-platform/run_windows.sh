@@ -50,5 +50,5 @@ done
 
 for ((j=1; j<=1000; j++))
 do
-	python Merkle_test_epoch_len_10_windows.py --sample_rate 10
+	python Merkle_test_epoch_len_10_windows.py --sample_rate 1
 done
