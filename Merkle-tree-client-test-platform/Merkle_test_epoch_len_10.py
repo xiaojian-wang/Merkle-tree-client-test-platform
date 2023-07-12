@@ -1,17 +1,14 @@
-import grpc
 from concurrent import futures
 import sys
 import glob
 
 
 import os
-import matplotlib.patches as patches
 from merkletools import MerkleTools
 import hashlib
 import json
 import numpy as np
 import random
-import subprocess
 import os
 import time
 
