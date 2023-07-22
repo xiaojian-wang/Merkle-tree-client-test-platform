@@ -12,9 +12,27 @@ import os
 import time
 
 intermediate_results = {}
+# hash_of_all_input_images = {}
 image_epoch_num = 0
 image_epoch = '0'
 proof_dict = {}
+tmp_hash = '57fcec903428812fe635fb2ba5d30d3d8752099d51ee68dfeff87d04db3643b5'
+
+
+# def update_hash_of_all_input_images(user_id,image_file_path):
+#     image = Image.open(io.BytesIO(image_data))
+#     image_data_hash = hashlib.sha256(image.tobytes()).hexdigest()
+#     image_data_hash_str = str(image_data_hash)
+#     if user_id not in self.hash_of_all_input_images.keys():
+#         self.hash_of_all_input_images[user_id] = {}
+    
+#     if image_epoch not in self.hash_of_all_input_images[user_id].keys():
+#         self.hash_of_all_input_images[user_id][image_epoch] = []
+#         self.hash_of_all_input_images[user_id][image_epoch].append(image_data_hash_str)
+#     else:
+#         self.hash_of_all_input_images[user_id][image_epoch].append(image_data_hash_str)
+
+
 # user id is just a random id is fine in test
 def generate_merkle_tree(user_id,result_file_path):  
     result_file_path = glob.glob(result_file_path)[0] #       
@@ -30,7 +48,7 @@ def generate_merkle_tree(user_id,result_file_path):
             results.append(cluster.strip())
             # print("results: ", results)
             # change the results list to string
-            results = results[0]
+            results = results[0] + tmp_hash
             # print("results of one cluster: ", results)
 
         else:
@@ -48,6 +66,7 @@ def generate_merkle_tree(user_id,result_file_path):
             # print("bbb intermediate_results[user_id][image_epoch_num]: ", intermediate_results[user_id][image_epoch_num])
 
     # print("intermediate_results init: ", intermediate_results)
+
 
 
             
@@ -91,7 +110,11 @@ def generate_merkle_tree(user_id,result_file_path):
     intermediate_results[user_id][image_epoch_num].append(final_results)
     # print("intermediate_results before add leaf: ", intermediate_results)
     intermediate_results_tmp = intermediate_results[user_id][image_epoch_num]
-    mt.add_leaf(intermediate_results_tmp, True) # add all the intermediate results as the leaf nodes, True means the leaf nodes will be hashed
+    hash_of_input_image = hash_of_all_input_images[user_id][image_epoch]
+    merkle_tree_leaf_string = [x + y for x, y in zip(intermediate_results_tmp, hash_of_input_image)]
+
+    mt.add_leaf(merkle_tree_leaf_string, True) # add all the intermediate results as the leaf nodes, True means the leaf nodes will be hashed
+
     mt.make_tree() # construct the merkle tree
     # print("root:", mt.get_merkle_root()) 
 
