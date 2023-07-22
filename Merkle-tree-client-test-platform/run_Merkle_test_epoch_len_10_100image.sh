@@ -38,9 +38,9 @@ done
 for i in {1..10}
 do
     sample_rate=$(awk "BEGIN{printf \"%.1f\", $i/10}")
-    echo "Running run_Merkle_test_epoch_len_10_100image.py with sample_rate: $sample_rate"
+    echo "Running Merkle_test_epoch_len_100.py with sample_rate: $sample_rate"
     for ((j=1; j<=1000; j++))
     do
-        python run_Merkle_test_epoch_len_10_100image.py --sample_rate $sample_rate
+        python Merkle_test_epoch_len_100.py --sample_rate $sample_rate
     done
 done
