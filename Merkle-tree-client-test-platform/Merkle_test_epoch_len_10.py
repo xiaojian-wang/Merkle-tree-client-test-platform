@@ -113,7 +113,7 @@ def generate_merkle_tree(user_id,result_file_path):
     # hash_of_input_image = hash_of_all_input_images[user_id][image_epoch]
     # merkle_tree_leaf_string = [x + y for x, y in zip(intermediate_results_tmp, hash_of_input_image)]
 
-    mt.add_leaf(merkle_tree_leaf_string, True) # add all the intermediate results as the leaf nodes, True means the leaf nodes will be hashed
+    mt.add_leaf(intermediate_results_tmp, True) # add all the intermediate results as the leaf nodes, True means the leaf nodes will be hashed
 
     mt.make_tree() # construct the merkle tree
     # print("root:", mt.get_merkle_root()) 
